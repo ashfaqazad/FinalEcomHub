@@ -1,0 +1,58 @@
+
+  [
+    {
+      "title": "Leather Backpack",
+      "description": "Stylish and durable everyday backpack.",
+      "price": 7999,
+      "image": "https://bedarimillat.com/Images/Imag/backpack.avif"
+    },
+    {
+      "title": "Sunglasses",
+      "description": "Classic design with UV protection.",
+      "price": 4999,
+      "image": "https://bedarimillat.com/Images/Imag/ClassicGlass.avif"
+    },
+    {
+      "title": "Running Shoes",
+      "description": "Lightweight and durable running shoes.",
+      "price": 8999,
+      "image": "https://bedarimillat.com/Images/Imag/runningshoes.avif"
+    },
+    {
+      "title": "Sneakers",
+      "description": "Comfortable casual sneakers.",
+      "price": 6999,
+      "image": "https://bedarimillat.com/Images/Imag/sneakers.avif"
+    },
+    {
+      "title": "Classic T-Shirt",
+      "description": "A comfortable cotton t-shirt for everyday wear.",
+      "price": 1999,
+      "image": "https://bedarimillat.com/Images/Imag/cottont-shirt.avif"
+    },
+    {
+      "title": "Wireless Headphones",
+      "description": "High-quality wireless audio experience.",
+      "price": 15999,
+      "image": "https://bedarimillat.com/Images/Imag/wirelessaudio.avif"
+    },
+    {
+      "title": "Designer Jeans",
+      "description": "Premium denim jeans with a perfect fit.",
+      "price": 8499,
+      "image": "https://bedarimillat.com/Images/Imag/denimjeans.avif"
+    },
+    {
+      "title": "Phone Case",
+      "description": "Protective and stylish phone case.",
+      "price": 1499,
+      "image": "https://bedarimillat.com/Images/Imag/phonecase.avif"
+    },
+    {
+      "title": "Smart Watch",
+      "description": "Modern smartwatch with health tracking features.",
+      "price": 29999,
+      "image": "https://bedarimillat.com/Images/Imag/smartwatch.avif"
+    }
+  ]
+  
