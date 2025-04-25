@@ -20,149 +20,145 @@ const ProductItem = ({
 }) => {
   return (
 
+//     <Card
+//   sx={{
+//     width: 360,
+//     height: 400,
+//     display: "flex",
+//     flexDirection: "column",
+//     borderRadius: 2,
+//     boxShadow: 3,
+//     border: "1px solid #1976d2",
+//     overflow: "hidden",
+//     backgroundColor: "#fff",
 
-    // <Card
-    //   sx={{
-    //     width: 300,
-    //     height: 480,
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     justifyContent: "space-between",
-    //     borderRadius: 2,
-    //     boxShadow: 3,
-    //     border: "1px solid #1976d2",
-    //     overflow: "hidden", // Cut extra content
-    //     backgroundColor: "#fff",
-    //   }}
-    // >
-    //   <CardMedia
-    //     component="img"
-    //     image={image}
-    //     alt={title}
-    //     sx={{
-    //       width: "100%",
-    //       height: 180, // ✅ Fixed image height
-    //       objectFit: "cover",
-    //     }}
-    //   />
+//   }}
+// >
+//   <CardMedia
+//     component="img"
+//     image={image}
+//     alt={title}
+//     sx={{
+//       width: "100%",
+//       height: 180,
+//       objectFit: "cover",
+//     }}
+//   />
 
-    //   <CardContent
-    //     sx={{
-    //       flexGrow: 1,
-    //       display: "flex",
-    //       flexDirection: "column",
-    //       justifyContent: "space-between",
-    //       px: 2,
-    //     }}
-    //   >
-    //     <Typography variant="h6" fontWeight="bold" gutterBottom>
-    //       {title}
-    //     </Typography>
+//   <CardContent
+//     sx={{
+//       flexGrow: 1,
+//       px: 2,
+//       py: 2,
+//       display: "flex",
+//       flexDirection: "column",
+//       gap: 1, // ✅ consistent spacing
+//       color: "black"
+//     }}
+//   >
+//     <Typography variant="h6" fontWeight="bold">
+//       {title}
+//     </Typography>
 
-    //     <Typography
-    //       variant="body2"
-    //       color="text.secondary"
-    //       sx={{
-    //         flexGrow: 1,
-    //         mb: 1,
-    //         fontSize: "0.875rem",
-    //       }}
-    //     >
-    //       {description?.length > 80
-    //         ? description.slice(0, 80) + "..."
-    //         : description}
-    //     </Typography>
+//     <Typography
+//       variant="body2"
+//       color="text.secondary"
+//       sx={{
+//         fontSize: "0.875rem",
+//         lineHeight: 1.4,
+//       }}
+//     >
+//       {description?.length > 80
+//         ? description.slice(0, 80) + "..."
+//         : description}
+//     </Typography>
 
-    //     <Typography variant="body1" fontWeight="bold">
-    //       Rs. {price}
-    //     </Typography>
+//     <Typography variant="body1" fontWeight="bold">
+//       Rs. {price}
+//     </Typography>
 
-    //     <Button
-    //       variant="contained"
-    //       color="warning"
-    //       fullWidth
-    //       onClick={() =>
-    //         onAddToBasket &&
-    //         onAddToBasket({ id, title, image, description, price })
-    //       }
-    //       sx={{ mt: 1 }}
-    //     >
-    //       Add Product
-    //     </Button>
-    //   </CardContent>
-    // </Card>
+//     <Button
+//       variant="contained"
+//       color="warning"
+//       fullWidth
+//       onClick={() =>
+//         onAddToBasket &&
+//         onAddToBasket({ id, title, image, description, price })
+//       }
+//       sx={{ mt: "auto" }} // ✅ push to bottom safely
+//     >
+//       Add Product
+//     </Button>
+//   </CardContent>
+// </Card>
 
 
 
-    <Card
+<Card
+sx={{
+  width: "100%",         // full width in container
+  maxWidth: 345,         // max width of each card
+  height: 300,           // fixed height
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  border: "1px solid #1976d2",
+  borderRadius: 2,
+  boxShadow: 3,
+  m: 1,
+}}
+>
+<CardMedia
+  component="img"
+  alt={title}
+  image={image}
   sx={{
-    width: 360,
-    height: 400,
+    width: "100%",
+    height: 200,           // ✅ consistent image height
+    objectFit: "cover",
+    ...imgStyle,
+  }}
+/>
+<CardContent
+  sx={{
+    flexGrow: 1,
     display: "flex",
     flexDirection: "column",
-    borderRadius: 2,
-    boxShadow: 3,
-    border: "1px solid #1976d2",
-    overflow: "hidden",
-    backgroundColor: "#fff",
+    justifyContent: "space-between",
   }}
 >
-  <CardMedia
-    component="img"
-    image={image}
-    alt={title}
-    sx={{
-      width: "100%",
-      height: 180,
-      objectFit: "cover",
-    }}
-  />
+  <Typography variant="h6" component="h4" sx={{ fontWeight: "bold" }}>
+    {title}
+  </Typography>
 
-  <CardContent
-    sx={{
-      flexGrow: 1,
-      px: 2,
-      py: 2,
-      display: "flex",
-      flexDirection: "column",
-      gap: 1, // ✅ consistent spacing
-    }}
-  >
-    <Typography variant="h6" fontWeight="bold">
-      {title}
-    </Typography>
+  <Typography variant="body1" sx={{ fontWeight: "bold", mt: 1 }}>
+    Rs. {price}
+  </Typography>
 
+  {description && (
     <Typography
       variant="body2"
-      color="text.secondary"
-      sx={{
-        fontSize: "0.875rem",
-        lineHeight: 1.4,
-      }}
+      sx={{ my: 1, fontStyle: "italic", color: "text.secondary" }}
     >
-      {description?.length > 80
-        ? description.slice(0, 80) + "..."
-        : description}
+      {description}
     </Typography>
+  )}
 
-    <Typography variant="body1" fontWeight="bold">
-      Rs. {price}
-    </Typography>
-
-    <Button
-      variant="contained"
-      color="warning"
-      fullWidth
-      onClick={() =>
-        onAddToBasket &&
-        onAddToBasket({ id, title, image, description, price })
-      }
-      sx={{ mt: "auto" }} // ✅ push to bottom safely
-    >
-      Add Product
-    </Button>
-  </CardContent>
+  <Button
+    variant="contained"
+    color="warning"
+    fullWidth
+    onClick={() =>
+      onAddToBasket &&
+      onAddToBasket({ id, title, image, description, price, imgStyle })
+    }
+    sx={{ mt: "auto" }}
+  >
+    Add Product
+  </Button>
+</CardContent>
 </Card>
+
 
 
   );
@@ -212,70 +208,70 @@ export default ProductItem;
 //   console.log("DESCRIPTION: ", description);
 
 //   return (
-//     <Card
-//       sx={{
-//         width: "100%",         // full width in container
-//         maxWidth: 345,         // max width of each card
-//         height: 300,           // fixed height
-//         display: "flex",
-//         flexDirection: "column",
-//         justifyContent: "space-between",
-//         border: "1px solid #1976d2",
-//         borderRadius: 2,
-//         boxShadow: 3,
-//         m: 1,
-//       }}
-//     >
-//       <CardMedia
-//         component="img"
-//         alt={title}
-//         image={image}
-//         sx={{
-//           width: "100%",
-//           height: 200,           // ✅ consistent image height
-//           objectFit: "cover",
-//           ...imgStyle,
-//         }}
-//       />
-//       <CardContent
-//         sx={{
-//           flexGrow: 1,
-//           display: "flex",
-//           flexDirection: "column",
-//           justifyContent: "space-between",
-//         }}
-//       >
-//         <Typography variant="h6" component="h4" sx={{ fontWeight: "bold" }}>
-//           {title}
-//         </Typography>
+    // <Card
+    //   sx={{
+    //     width: "100%",         // full width in container
+    //     maxWidth: 345,         // max width of each card
+    //     height: 300,           // fixed height
+    //     display: "flex",
+    //     flexDirection: "column",
+    //     justifyContent: "space-between",
+    //     border: "1px solid #1976d2",
+    //     borderRadius: 2,
+    //     boxShadow: 3,
+    //     m: 1,
+    //   }}
+    // >
+    //   <CardMedia
+    //     component="img"
+    //     alt={title}
+    //     image={image}
+    //     sx={{
+    //       width: "100%",
+    //       height: 200,           // ✅ consistent image height
+    //       objectFit: "cover",
+    //       ...imgStyle,
+    //     }}
+    //   />
+    //   <CardContent
+    //     sx={{
+    //       flexGrow: 1,
+    //       display: "flex",
+    //       flexDirection: "column",
+    //       justifyContent: "space-between",
+    //     }}
+    //   >
+    //     <Typography variant="h6" component="h4" sx={{ fontWeight: "bold" }}>
+    //       {title}
+    //     </Typography>
 
-//         <Typography variant="body1" sx={{ fontWeight: "bold", mt: 1 }}>
-//           Rs. {price}
-//         </Typography>
+    //     <Typography variant="body1" sx={{ fontWeight: "bold", mt: 1 }}>
+    //       Rs. {price}
+    //     </Typography>
 
-//         {description && (
-//           <Typography
-//             variant="body2"
-//             sx={{ my: 1, fontStyle: "italic", color: "text.secondary" }}
-//           >
-//             {description}
-//           </Typography>
-//         )}
+    //     {description && (
+    //       <Typography
+    //         variant="body2"
+    //         sx={{ my: 1, fontStyle: "italic", color: "text.secondary" }}
+    //       >
+    //         {description}
+    //       </Typography>
+    //     )}
 
-//         <Button
-//           variant="contained"
-//           color="warning"
-//           fullWidth
-//           onClick={() =>
-//             onAddToBasket &&
-//             onAddToBasket({ id, title, image, description, price, imgStyle })
-//           }
-//           sx={{ mt: "auto" }}
-//         >
-//           Add Product
-//         </Button>
-//       </CardContent>
-//     </Card>
+    //     <Button
+    //       variant="contained"
+    //       color="warning"
+    //       fullWidth
+    //       onClick={() =>
+    //         onAddToBasket &&
+    //         onAddToBasket({ id, title, image, description, price, imgStyle })
+    //       }
+    //       sx={{ mt: "auto" }}
+    //     >
+    //       Add Product
+    //     </Button>
+    //   </CardContent>
+    // </Card>
 //   );
 // };
 

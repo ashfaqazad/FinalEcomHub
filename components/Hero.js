@@ -2,7 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import ProductItem from "@/components/ProductItem";
-import { Grid, Box, Typography, Container } from "@mui/material";
+import { Grid, Box, Typography, Container,TextField } from "@mui/material";
+import AppBar from '@mui/material/AppBar';
+
 
 const Home = () => {
   const [eShop, setEshop] = useState([]);
@@ -39,6 +41,11 @@ const Home = () => {
     return <Typography variant="h6" color="error">{error}</Typography>;
   }
 
+
+  const handleSearchChange = (event) => {
+    onSearch(event.target.value);
+};
+
   return (
     <div>
       {/* Hero Image */}
@@ -51,15 +58,61 @@ const Home = () => {
       </Box> */}
 
 
-            {/* Hero Image */}
-            <Box sx={{ width: '100%' }}>
-            <img
-            src="/Images/Heroimg.png"
-            alt="eCommerce"
-            style={{ width: "100%", height: "90vh" }}
-            />
-            </Box>
+{/* Hero image */}
+<Box sx={{ flexGrow: 1 }}>
+  <AppBar position="fixed" sx={{ backgroundColor: "#000" }}>
+    {/* Navbar content */}
+  </AppBar>
+</Box>
 
+<Box
+  sx={{
+    position: "relative",
+    width: "100%",
+    height: "auto",
+    overflow: "hidden",
+  }}
+>
+  {/* Hero Image */}
+  <img
+    src="/Images/Heroimg.png"
+    alt="eCommerce"
+    style={{
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      objectPosition: "top", // ensure "Welcome" is visible
+      display: "block",
+    }}
+  />
+
+  {/* Overlay for Search Bar */}
+  <Box
+    sx={{
+      position: "absolute",
+      top: { xs: "56px", md: "64px" }, // push content below navbar
+      bottom: 30,
+      left: "50%",
+      transform: "translateX(-50%)",
+      width: { xs: "80%", sm: "60%", md: "40%" },
+      display: "flex",
+      alignItems: "flex-end",
+    }}
+  >
+    <TextField
+      fullWidth
+      placeholder="Search here..."
+      variant="outlined"
+      size="small"
+      onChange={handleSearchChange}
+      sx={{
+        backgroundColor: "white",
+        borderRadius: 2,
+        boxShadow: 3,
+      }}
+    />
+  </Box>
+</Box>
 
       {/* Products Section */}
       <Container sx={{ my: 5 }}>
