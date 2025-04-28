@@ -35,18 +35,37 @@ const appReducer = (state, action) => {
     case "SET_USER":
       return { ...state, user: action.payload };
 
+    // case "ADD_TO_BASKET":
+    //   const existingItem = state.basket.find((item) => item._id === action.payload._id);
+    //   if (existingItem) {
+    //     return {
+    //       ...state,
+    //       basket: state.basket.map((item) =>
+    //         item._id === action.payload._id ? { ...item, quantity: item.quantity + 1 } : item
+    //       ),
+    //     };
+    //   } else {
+    //     return { ...state, basket: [...state.basket, { ...action.payload, quantity: 1 }] };
+    //   }
+
     case "ADD_TO_BASKET":
-      const existingItem = state.basket.find((item) => item._id === action.payload._id);
-      if (existingItem) {
-        return {
-          ...state,
-          basket: state.basket.map((item) =>
-            item._id === action.payload._id ? { ...item, quantity: item.quantity + 1 } : item
-          ),
-        };
-      } else {
-        return { ...state, basket: [...state.basket, { ...action.payload, quantity: 1 }] };
-      }
+  const existingItem = state.basket.find((item) => item.id === action.payload.id);
+  if (existingItem) {
+    return {
+      ...state,
+      basket: state.basket.map((item) =>
+        item._id === action.payload.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ),
+    };
+  } else {
+    return {
+      ...state,
+      basket: [...state.basket, { ...action.payload, quantity: 1 }],
+    };
+  }
+
 
     case "INCREMENT_QUANTITY":
       return {

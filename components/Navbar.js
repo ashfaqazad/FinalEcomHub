@@ -16,6 +16,8 @@ import {
     ListItem,
     ListItemText,
     useMediaQuery,
+    TextField,
+    Box
 } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -25,13 +27,18 @@ import {
     Menu as MenuIcon,
 } from "@mui/icons-material";
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-
+import LogoutIcon from '@mui/icons-material/Logout';
+// import { useRouter } from "next/navigation"; // 👈 import
 // import { Menu as MenuIcon } from "@mui/icons-material";
 import { useAppContext } from "@/context/AppContext";
 // import CartDrawer from "@/components/CartDrawer";
+// import CartPage from "@/components/CartPage";
+
 import axios from "axios";
 
 const Navbar = () => {
+
+    
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { state, dispatch, mode, toggleTheme } = useAppContext();
@@ -64,6 +71,12 @@ const Navbar = () => {
         }
     };
 
+
+    const handleSearchChange = (event) => {
+        onSearch(event.target.value);
+    };
+
+
     const totalCartItems = state.basket.reduce(
         (total, item) => total + item.quantity,
         0
@@ -74,9 +87,14 @@ const Navbar = () => {
             <ListItem button component={Link} href="/menu">
                 <ListItemText primary="Menu" />
             </ListItem>
-            <ListItem button onClick={() => setIsCartOpen(true)}>
-                <ListItemText primary="Cart" />
+            <ListItem button component={Link} href="/cartpage">
+                <ListItemText primary="CartPage" />
             </ListItem>
+
+            {/* <ListItem button onClick={() => setIsCartOpen(true)}>
+                <ListItemText primary="CartPage" />
+            </ListItem> */}
+
             <ListItem button component={Link} href="/myorders">
                 <ListItemText primary="My Orders" />
             </ListItem>
@@ -104,10 +122,34 @@ const Navbar = () => {
                         variant="h6"
                         component={Link}
                         href="/"
-                        sx={{ textDecoration: "none", color: "inherit" }}
+                        sx={{ textDecoration: "none", color: "inherit", fontStyle: "italic" }}
                     >
-                        FastFood
+                        eShop
                     </Typography>
+
+
+
+                    {/* Search Bar */}
+                    <Box sx={{ flexGrow: 1, mx: 2 }}>
+                        <TextField
+                            fullWidth
+                            placeholder="Search here..."
+                            variant="outlined"
+                            size="small"
+                            onChange={handleSearchChange}
+
+                            // onChange={(e) => setSearch(e.target.value)} // Passing the query to parent component (Home)
+                            // InputProps={{
+                            // //   startAdornment: (
+                            // //     // <InputAdornment position="start">
+                            // //     //   <SearchIcon />
+                            // //     // </InputAdornment>
+                            // //   ),
+                            // }}
+                            sx={{ backgroundColor: 'white', borderRadius: '4px' }}
+                        />
+                    </Box>
+
 
                     {/* 🔹 If NOT Logged In */}
                     {!state.user ? (
@@ -126,6 +168,9 @@ const Navbar = () => {
                             >
                                 Login
                             </Button>
+
+
+
 
                         </div>
                     ) : isMobile ? (
@@ -149,9 +194,14 @@ const Navbar = () => {
                                     <ListItem button component={Link} href="/menu">
                                         <ListItemText primary="Menu" />
                                     </ListItem>
-                                    <ListItem button onClick={() => setIsCartOpen(true)}>
-                                        <ListItemText primary="Cart" />
+                                    <ListItem button component={Link} href="/cartpage">
+                                        <ListItemText primary="CartPage" />
                                     </ListItem>
+
+                                    {/* <ListItem button onClick={() => setIsCartOpen(true)}>
+                                        <ListItemText primary="Cart" />
+                                    </ListItem> */}
+
                                     <ListItem button component={Link} href="/myorders">
                                         <ListItemText primary="My Orders" />
                                     </ListItem>
@@ -210,7 +260,7 @@ const Navbar = () => {
 
 
 
-                            <IconButton color="inherit" onClick={() => setIsCartOpen(true)}>
+                            <IconButton color="inherit" onClick={() => router.push('/cartpage')}>
                                 <Badge badgeContent={totalCartItems} color="error">
                                     <ShoppingCartIcon />
                                 </Badge>
@@ -220,9 +270,20 @@ const Navbar = () => {
                                 <AccountCircleOutlinedIcon />
                             </IconButton>
 
-                            <Button onClick={handleLogout} variant="contained" color="error">
+                            {/* <Button onClick={handleLogout} variant="contained" color="error">
                                 Logout
+                            </Button> */}
+
+                            {/* 🔹 Logout Button */}
+                            <Button
+                                onClick={handleLogout}
+                                variant="text" // No background, only text/icon
+                                color="inherit" // Default black color
+                                startIcon={<LogoutIcon />} // Icon ko button ke start mein lagane ka best practice
+                            >
+
                             </Button>
+
                         </div>
                     )}
                 </Toolbar>
