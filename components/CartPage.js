@@ -71,22 +71,22 @@ const CartPage = () => {
                 <List>
                     {basket.length > 0 ? (
                         basket.map((item) => (
-                            <ListItem key={item._id} sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                                <Avatar src={item.imageUrl} alt={item.name} sx={{ width: 80, height: 80, borderRadius: 2 }} />
+                            <ListItem key={item.id} sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                                <Avatar src={item.image} alt={item.name} sx={{ width: 200, height: 200, borderRadius: 2 }} />
                                 <Box sx={{ flexGrow: 1 }}>
                                     <Typography variant="body1" fontWeight="bold">{item.name}</Typography>
                                     <Typography variant="body2" color="text.secondary">
                                         ${item.price.toFixed(2)}
                                     </Typography>
                                     <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1 }}>
-                                        <IconButton onClick={() => dispatch({ type: "DECREMENT_QUANTITY", payload: item._id })}>
+                                        <IconButton onClick={() => dispatch({ type: "DECREMENT_QUANTITY", payload: item.id })}>
                                             <RemoveIcon />
                                         </IconButton>
                                         <Typography variant="body1">{item.quantity}</Typography>
-                                        <IconButton onClick={() => dispatch({ type: "INCREMENT_QUANTITY", payload: item._id })}>
+                                        <IconButton onClick={() => dispatch({ type: "INCREMENT_QUANTITY", payload: item.id })}>
                                             <AddIcon />
                                         </IconButton>
-                                        <IconButton onClick={() => dispatch({ type: "REMOVE_FROM_BASKET", payload: item._id })}>
+                                        <IconButton onClick={() => dispatch({ type: "REMOVE_FROM_BASKET", payload: item.id })}>
                                             <DeleteIcon />
                                         </IconButton>
                                     </Box>
@@ -102,6 +102,7 @@ const CartPage = () => {
             {basket.length > 0 && (
                 <Box
                     sx={{
+                        width: 380,
                         mt: 4,
                         borderTop: 1,
                         borderColor: "divider",

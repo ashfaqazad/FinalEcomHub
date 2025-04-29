@@ -54,7 +54,7 @@ const appReducer = (state, action) => {
     return {
       ...state,
       basket: state.basket.map((item) =>
-        item._id === action.payload.id
+        item.id === action.payload.id
           ? { ...item, quantity: item.quantity + 1 }
           : item
       ),
@@ -71,7 +71,7 @@ const appReducer = (state, action) => {
       return {
         ...state,
         basket: state.basket.map((item) =>
-          item._id === action.payload ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === action.payload ? { ...item, quantity: item.quantity + 1 } : item
         ),
       };
 
@@ -80,13 +80,13 @@ const appReducer = (state, action) => {
         ...state,
         basket: state.basket
           .map((item) =>
-            item._id === action.payload ? { ...item, quantity: item.quantity - 1 } : item
+            item.id === action.payload ? { ...item, quantity: item.quantity - 1 } : item
           )
           .filter((item) => item.quantity > 0),
       };
 
     case "REMOVE_FROM_BASKET":
-      return { ...state, basket: state.basket.filter((item) => item._id !== action.payload) };
+      return { ...state, basket: state.basket.filter((item) => item.id !== action.payload) };
 
     case "CLEAR_BASKET":
       return { ...state, basket: [] };

@@ -87,7 +87,7 @@ const Home = () => {
             filteredProducts.map((item) => (
               <Grid item xs={12} sm={6} md={4} key={item._id}>
                 <ProductItem
-                  id={item._id}
+                  id={item.id}
                   title={item.title}
                   image={item.image}
                   description={item.description}
