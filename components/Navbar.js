@@ -96,7 +96,7 @@ const Navbar = () => {
             </ListItem> */}
 
             <ListItem button component={Link} href="/myorders">
-                <ListItemText primary="My Orders" />
+                <ListItemText primary="MyOrders" />
             </ListItem>
             <ListItem button onClick={handleLogout}>
                 <ListItemText primary="Logout" />
@@ -203,7 +203,7 @@ const Navbar = () => {
                                     </ListItem> */}
 
                                     <ListItem button component={Link} href="/myorders">
-                                        <ListItemText primary="My Orders" />
+                                        <ListItemText primary="MyOrders" />
                                     </ListItem>
                                     <ListItem button onClick={handleLogout}>
                                         <ListItemText primary="Logout" />
@@ -266,7 +266,7 @@ const Navbar = () => {
                                 </Badge>
                             </IconButton>
 
-                            <IconButton color="inherit" component={Link} href="/myorders">
+                            <IconButton color="inherit" component={Link} href="/MyOrders">
                                 <AccountCircleOutlinedIcon />
                             </IconButton>
 

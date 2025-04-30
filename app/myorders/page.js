@@ -21,6 +21,30 @@ const MyOrders = () => {
 
 
 
+  // useEffect(() => {
+  //   const testApi = async () => {
+  //     try {
+  //       const res = await fetch('/api/myOrderData', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({ email: "test@example.com" }),
+  //       });
+  
+  //       const data = await res.json();
+  //       console.log("My Orders Response:", data);
+  //     } catch (err) {
+  //       console.error("Fetch error:", err);
+  //     }
+  //   };
+  
+  //   testApi();
+  // }, []);
+  
+
+
+
   useEffect(() => {
     const fetchOrders = async () => {
       const storedUser = localStorage.getItem("user");
@@ -32,7 +56,7 @@ const MyOrders = () => {
       }
   
       try {
-        const response = await axios.post("/api/myorders", { email: userEmail });
+        const response = await axios.post("/api/myOrderData", { email: userEmail });
         setOrders(response.data.orderdata);  // ✅ Now matches MERN response structure
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -55,7 +79,7 @@ const MyOrders = () => {
 {orders.length > 0 ? (
   orders.map((order, index) => (
     order?.orders_data?.length > 0 && (
-      <Card key={order._id || index} sx={{ marginBottom: 3 }}>
+      <Card key={order.id || index} sx={{ marginBottom: 3 }}>
         <CardContent>
           <Typography variant="h6">Order #{index + 1}</Typography>
           <Typography variant="subtitle2">Email: {order.email}</Typography>

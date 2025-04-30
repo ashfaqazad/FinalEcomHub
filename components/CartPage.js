@@ -40,10 +40,10 @@ const CartPage = () => {
             const response = await axios.post("/api/orders", {
                 email: userEmail,
                 orders_data: basket.map(item => ({
-                    id: item._id,
+                    id: item.id,
                     title: item.name,
                     price: item.price,
-                    image: item.imageUrl,
+                    image: item.image,
                     quantity: item.quantity || 1,
                     total: item.price * (item.quantity || 1),
                 })),
