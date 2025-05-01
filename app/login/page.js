@@ -12,6 +12,7 @@ import {
   Button,
   TextField,
   useMediaQuery,
+  Box,
 } from "@mui/material";
 
 const LoginPage = () => {
@@ -51,11 +52,7 @@ const LoginPage = () => {
       };
 
       if (activeButton === "register") {
-        setFormData({
-          username: "",
-          email: "",
-          password: "",
-        });
+        setFormData({ username: "", email: "", password: "" });
         setActiveButton("login");
         return;
       }
@@ -64,13 +61,7 @@ const LoginPage = () => {
         localStorage.setItem("authToken", res.data.token);
         localStorage.setItem("user", JSON.stringify(userData));
         dispatch({ type: "LOGIN_SUCCESS", payload: userData });
-
-        setFormData({
-          username: "",
-          email: "",
-          password: "",
-        });
-
+        setFormData({ username: "", email: "", password: "" });
         router.push("/");
       }
     } catch (err) {
@@ -81,53 +72,54 @@ const LoginPage = () => {
 
   return (
     <Container
+      maxWidth="xl"
       sx={{
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        width: "100vw",
-        height: "100vh",
-        padding: 0,
-        margin: 0,
+        // display: "flex",
+        // flexDirection: isMobile ? "column" : "row",
+        // alignItems: "center",
+        // justifyContent: "center",
+        // minHeight: "100vh",
+        py: 4,
       }}
     >
-      <div
-        style={{
+      <Box
+        sx={{
           flex: 1,
-          width: "1000px",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
-          padding: "20px",
-          margin: "0 auto", // Add this line
-
+          width: "100%",
+          px: 2,
         }}
       >
-        <Card sx={{ width: "100%", maxWidth: 500, padding: 2 }}>
+        <Card sx={{ width: "100%", maxWidth: 480, p: 2 }}>
           <CardContent>
-            <Typography variant="h5" fontWeight="bold">
+            <Typography variant="h5" fontWeight="bold" gutterBottom>
               Welcome to FastFood
             </Typography>
             <Typography variant="body2" color="textSecondary">
               Sign in or create an account to order
             </Typography>
 
-            <div
-              style={{
+            <Box
+              sx={{
                 display: "flex",
-                gap: "10px",
-                marginTop: "20px",
+                gap: 1,
+                mt: 2,
                 backgroundColor: "#E0E0E0",
-                padding: "5px",
+                p: 1,
+                borderRadius: "4px",
               }}
             >
               <Button
                 fullWidth
                 variant="contained"
                 onClick={() => setActiveButton("login")}
-                style={{
+                sx={{
                   backgroundColor:
                     activeButton === "login" ? "white" : "transparent",
                   color: "black",
+                  boxShadow: "none",
+                  "&:hover": { backgroundColor: "#f5f5f5" },
                 }}
               >
                 Login
@@ -136,118 +128,91 @@ const LoginPage = () => {
                 fullWidth
                 variant="contained"
                 onClick={() => setActiveButton("register")}
-                style={{
+                sx={{
                   backgroundColor:
                     activeButton === "register" ? "white" : "transparent",
                   color: "black",
+                  boxShadow: "none",
+                  "&:hover": { backgroundColor: "#f5f5f5" },
                 }}
               >
                 Register
               </Button>
-            </div>
+            </Box>
 
             {error && (
-              <Typography color="error" style={{ marginTop: "10px" }}>
+              <Typography color="error" mt={2}>
                 {error}
               </Typography>
             )}
 
-            <form onSubmit={handleSubmit}>
+            <Box component="form" onSubmit={handleSubmit} mt={2}>
               {activeButton === "register" && (
-                <>
-                  <TextField
-                    fullWidth
-                    label="Username"
-                    name="username"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={handleChange}
-                    value={formData.username}
-                    required
-                  />
-                  <TextField
-                    fullWidth
-                    label="Email"
-                    name="email"
-                    type="email"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={handleChange}
-                    value={formData.email}
-                    required
-                  />
-                  <TextField
-                    fullWidth
-                    label="Password"
-                    name="password"
-                    type="password"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={handleChange}
-                    value={formData.password}
-                    required
-                  />
-                </>
+                <TextField
+                  fullWidth
+                  label="Username"
+                  name="username"
+                  margin="normal"
+                  variant="outlined"
+                  onChange={handleChange}
+                  value={formData.username}
+                  required
+                />
               )}
-
-              {activeButton === "login" && (
-                <>
-                  <TextField
-                    fullWidth
-                    label="Email"
-                    name="email"
-                    type="email"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={handleChange}
-                    value={formData.email}
-                    required
-                  />
-                  <TextField
-                    fullWidth
-                    label="Password"
-                    name="password"
-                    type="password"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={handleChange}
-                    value={formData.password}
-                    required
-                  />
-                </>
-              )}
+              <TextField
+                fullWidth
+                label="Email"
+                name="email"
+                type="email"
+                margin="normal"
+                variant="outlined"
+                onChange={handleChange}
+                value={formData.email}
+                required
+              />
+              <TextField
+                fullWidth
+                label="Password"
+                name="password"
+                type="password"
+                margin="normal"
+                variant="outlined"
+                onChange={handleChange}
+                value={formData.password}
+                required
+              />
 
               <Button
                 fullWidth
                 variant="contained"
                 color="error"
-                style={{ marginTop: "20px" }}
                 type="submit"
+                sx={{ mt: 3 }}
               >
                 {activeButton === "login" ? "Login" : "Register"}
               </Button>
-            </form>
+            </Box>
           </CardContent>
         </Card>
-      </div>
+      </Box>
 
-      {/* Image Only on Desktop View */}
+      {/* Optional Image Side for Desktop View */}
       {!isMobile && (
-        <>
-        
-        </>
+        <Box
+          flex={1}
+          sx={{
+            height: "100%",
+            backgroundImage: "url('/login-banner.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
       )}
     </Container>
   );
 };
 
 export default LoginPage;
-
-
-
-
-
-
 
 
 
@@ -276,6 +241,7 @@ export default LoginPage;
 //   Typography,
 //   Button,
 //   TextField,
+//   useMediaQuery,
 // } from "@mui/material";
 
 // const LoginPage = () => {
@@ -286,81 +252,87 @@ export default LoginPage;
 //     password: "",
 //   });
 //   const [error, setError] = useState("");
-//     const { dispatch } = useAppContext();
+//   const { dispatch } = useAppContext();
 //   const router = useRouter();
+
+//   const isMobile = useMediaQuery("(max-width:768px)");
 
 //   const handleChange = (e) => {
 //     setFormData({ ...formData, [e.target.name]: e.target.value });
 //   };
 
-
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     setError("");
-  
-//     const url =
-//       activeButton === "register" ? "/api/register" : "/api/login";
-  
+
+//     const url = activeButton === "register" ? "/api/register" : "/api/login";
+
 //     try {
 //       const res = await axios.post(url, formData, {
 //         withCredentials: true,
 //       });
-  
+
 //       alert(res.data.message);
-  
+
 //       const userData = {
 //         id: res.data.id,
 //         username: res.data.username,
 //         email: res.data.email,
 //       };
-  
-//       // ✅ REGISTER Logic
+
 //       if (activeButton === "register") {
 //         setFormData({
 //           username: "",
 //           email: "",
 //           password: "",
 //         });
-  
-//         setActiveButton("login"); // switch form
-//         return; // don't redirect to home
+//         setActiveButton("login");
+//         return;
 //       }
-  
-//       // ✅ LOGIN Logic
+
 //       if (res.data.token) {
 //         localStorage.setItem("authToken", res.data.token);
 //         localStorage.setItem("user", JSON.stringify(userData));
-
-
 //         dispatch({ type: "LOGIN_SUCCESS", payload: userData });
 
-  
 //         setFormData({
 //           username: "",
 //           email: "",
 //           password: "",
 //         });
-  
-//         router.push("/"); // ✅ redirect after login
+
+//         router.push("/");
 //       }
 //     } catch (err) {
 //       console.error(err);
 //       setError(err.response?.data?.message || "Something went wrong");
 //     }
 //   };
-  
 
 //   return (
-//     <Container style={{ display: "flex", width: "100vw", height: "100vh" }}>
+//     <Container
+//       sx={{
+//         display: "flex",
+//         flexDirection: isMobile ? "column" : "row",
+//         width: "100vw",
+//         height: "100vh",
+//         padding: 0,
+//         margin: 0,
+//       }}
+//     >
 //       <div
 //         style={{
 //           flex: 1,
+//           width: "1000px",
 //           display: "flex",
 //           justifyContent: "center",
 //           alignItems: "center",
+//           padding: "20px",
+//           margin: "0 auto", // Add this line
+
 //         }}
 //       >
-//         <Card style={{ padding: "20px", borderRadius: "10px" }}>
+//         <Card sx={{ width: "100%", maxWidth: 500, padding: 2 }}>
 //           <CardContent>
 //             <Typography variant="h5" fontWeight="bold">
 //               Welcome to FastFood
@@ -489,21 +461,18 @@ export default LoginPage;
 //         </Card>
 //       </div>
 
-//       {/* Right Side - Full Screen Image */}
-//       <div
-//         style={{
-//           flex: 1,
-//           width: "100%",
-//           height: "100vh",
-//           backgroundImage:
-//             'url("https://images.unsplash.com/photo-1576048177169-f0622a66adbd")',
-//           backgroundSize: "cover",
-//           backgroundPosition: "center",
-//           backgroundRepeat: "no-repeat",
-//         }}
-//       ></div>
+//       {/* Image Only on Desktop View */}
+//       {!isMobile && (
+//         <>
+        
+//         </>
+//       )}
 //     </Container>
 //   );
 // };
 
 // export default LoginPage;
+
+
+
+

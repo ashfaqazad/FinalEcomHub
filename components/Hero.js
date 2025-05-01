@@ -10,7 +10,10 @@ const Home = () => {
   const { dispatch } = useAppContext(); // ✅ get dispatch
   const [eShop, setEshop] = useState([]);
   const [error, setError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
+  const { state } = useAppContext();
+  const { searchQuery } = state;
+
 
   const loadData = async () => {
     try {
@@ -82,10 +85,10 @@ const Home = () => {
 
       {/* Products Section */}
       <Container sx={{ my: 5 }}>
-        <Grid container spacing={4} justifyContent="center">
+        <Grid container spacing={2} alignItems="stretch">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((item) => (
-              <Grid item xs={12} sm={6} md={4} key={item._id}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
                 <ProductItem
                   id={item.id}
                   title={item.title}

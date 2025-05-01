@@ -93,10 +93,12 @@ const MyOrders = () => {
               <Grid item xs={12} sm={6} md={4} key={i}>
                 <CardMedia
                   component="img"
-                  width="200"
+                  width="100"
                   height="120"
                   image={item.image}
                   alt={item.title}
+                  sx={{width: "300px", height: "300px"
+                  }}
                 />
                 <Typography><strong>{item.title}</strong></Typography>
                 <Typography>Rs. {item.price}</Typography>

@@ -31,6 +31,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 // import { useRouter } from "next/navigation"; // 👈 import
 // import { Menu as MenuIcon } from "@mui/icons-material";
 import { useAppContext } from "@/context/AppContext";
+
 // import CartDrawer from "@/components/CartDrawer";
 // import CartPage from "@/components/CartPage";
 
@@ -38,12 +39,13 @@ import axios from "axios";
 
 const Navbar = () => {
 
-    
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { state, dispatch, mode, toggleTheme } = useAppContext();
     const router = useRouter();
     const isMobile = useMediaQuery("(max-width:768px)");
+    // const { themeMode } = useAppContext(); // ya jo aapka context hook ho
+
 
     useEffect(() => {
         const token = Cookies.get("token") || localStorage.getItem("authToken");
@@ -71,9 +73,8 @@ const Navbar = () => {
         }
     };
 
-
-    const handleSearchChange = (event) => {
-        onSearch(event.target.value);
+    const handleSearchChange = (e) => {
+        dispatch({ type: "SET_SEARCH_QUERY", payload: e.target.value });
     };
 
 
@@ -130,24 +131,29 @@ const Navbar = () => {
 
 
                     {/* Search Bar */}
-                    <Box sx={{ flexGrow: 1, mx: 2 }}>
+                    <Box sx={{
+                        flexGrow: 1, mx: 2,
+                        display: {
+                            xs: "none",
+                            sm: "block"
+                        }
+                    }}>
                         <TextField
                             fullWidth
                             placeholder="Search here..."
                             variant="outlined"
                             size="small"
                             onChange={handleSearchChange}
-
-                            // onChange={(e) => setSearch(e.target.value)} // Passing the query to parent component (Home)
-                            // InputProps={{
-                            // //   startAdornment: (
-                            // //     // <InputAdornment position="start">
-                            // //     //   <SearchIcon />
-                            // //     // </InputAdornment>
-                            // //   ),
-                            // }}
-                            sx={{ backgroundColor: 'white', borderRadius: '4px' }}
+                            value={state.searchQuery}
+                            sx={{
+                                backgroundColor: mode === 'dark' ? '#424242' : 'white',
+                                borderRadius: '4px',
+                                input: {
+                                    color: mode === 'dark' ? 'white' : 'black'
+                                }
+                            }}
                         />
+
                     </Box>
 
 
@@ -164,7 +170,7 @@ const Navbar = () => {
                                 component={Link}
                                 href="/login"
                                 variant="contained"
-                                color="error"
+                                color="primary"
                             >
                                 Login
                             </Button>
@@ -210,11 +216,15 @@ const Navbar = () => {
                                     </ListItem>
 
                                     {/* 🔆 Dark/Light Toggle - Last in mobile */}
-                                    <ListItem button onClick={toggleTheme}>
+                                    {/* <ListItem button onClick={toggleTheme}>
                                         <ListItemText
                                             primary={mode === "dark" ? "Light Mode" : "Dark Mode"}
                                         />
-                                    </ListItem>
+                                    </ListItem> */}
+                                    <IconButton color="inherit" onClick={toggleTheme}>
+                                        {mode === "dark" ? <SunIcon /> : <MoonIcon />}
+                                    </IconButton>
+
                                 </List>
                             </Drawer>
                         </>

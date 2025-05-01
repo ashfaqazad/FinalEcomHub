@@ -13,6 +13,10 @@ const initialState = {
   basket: [],
   user: typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null,
   userEmail: typeof window !== "undefined" ? localStorage.getItem("userEmail") : "",
+  searchQuery: "", 
+  darkMode: false,
+
+
 };
 
 // const { state } = useAppContext();
@@ -91,8 +95,19 @@ const appReducer = (state, action) => {
     case "CLEAR_BASKET":
       return { ...state, basket: [] };
 
-    default:
-      return state;
+    // default:
+    //   return state;
+
+
+      case "SET_SEARCH_QUERY":
+        return {
+          ...state,
+          searchQuery: action.payload,
+        };
+  
+      default:
+        return state;
+  
   }
 };
 
