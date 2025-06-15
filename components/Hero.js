@@ -62,26 +62,33 @@ const Home = () => {
         </AppBar>
       </Box>
 
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          height: "90vh",
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src="/Images/Eimage.avif"
-          alt="eCommerce"
-          style={{
-            width: "100%",
-            height: "100%",
-            // objectFit: "cover",
-            objectPosition: "top",
-            display: "block",
-          }}
-        />
-      </Box>
+
+<Box
+  sx={{
+    position: "relative",
+    width: "100%",
+    height: {
+      xs: 200,   // Mobile
+      sm: 300,   // Tablets
+      md: "100vh" // Desktop
+    },
+    overflow: "hidden",
+  }}
+>
+  <Box
+    component="img"
+    src="/Images/Eimage.avif"
+    alt="eCommerce"
+    sx={{
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      objectPosition: "top",
+      display: "block",
+    }}
+  />
+</Box>
+
 
       {/* Products Section */}
       <Container sx={{ my: 5 }}>

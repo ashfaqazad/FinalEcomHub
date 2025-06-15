@@ -276,7 +276,7 @@ const Navbar = () => {
                                 </Badge>
                             </IconButton>
 
-                            <IconButton color="inherit" component={Link} href="/MyOrders">
+                            <IconButton color="inherit" component={Link} href="/myorders">
                                 <AccountCircleOutlinedIcon />
                             </IconButton>
 

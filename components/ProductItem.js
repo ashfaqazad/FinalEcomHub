@@ -37,7 +37,7 @@ const ProductItem = ({
     border: "1px solid #1976d2",
     borderRadius: 2,
     boxShadow: 3,
-    m: 1,
+    // m: 0.5,
   }}
 >
   <CardMedia
@@ -82,7 +82,7 @@ const ProductItem = ({
         fullWidth
         onClick={() =>
           onAddToBasket &&
-          onAddToBasket({ id, title, image, description, price, imgStyle })
+          onAddToBasket({ id, name: title, image, description, price, imgStyle })
         }
       >
         Add Product

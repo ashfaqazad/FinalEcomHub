@@ -1,3 +1,4 @@
+
 "use client";
 
 import { 
@@ -25,42 +26,58 @@ const CartPage = () => {
         }
     }, []);
 
-    const handleCheckout = async () => {
-        if (!basket || basket.length === 0) {
-            alert("Cart is empty, cannot place order!");
-            return;
-        }
 
-        if (!userEmail) {
-            alert("User email is missing. Please log in.");
-            return;
-        }
+const handleCheckout = async () => {
+  if (!basket || basket.length === 0) {
+    alert("Cart is empty, cannot place order!");
+    return;
+  }
 
-        try {
-            const response = await axios.post("/api/orders", {
-                email: userEmail,
-                orders_data: basket.map(item => ({
-                    id: item.id,
-                    title: item.name,
-                    price: item.price,
-                    image: item.image,
-                    quantity: item.quantity || 1,
-                    total: item.price * (item.quantity || 1),
-                })),
-            });
+  if (!userEmail) {
+    alert("User email is missing. Please log in.");
+    return;
+  }
+console.log("Sending basket to Stripe API:", basket);
 
-            if (response.status === 200) {
-                alert("Order placed successfully!");
-                dispatch({ type: "CLEAR_BASKET" });
-            } else {
-                alert("Failed to place order. Please try again.");
-            }
-        } catch (error) {
-            console.error("Error during checkout:", error);
-            alert("An error occurred while placing the order. Please try again.");
-        }
-    };
+  try {
+    // ✅ STEP 1: Pehle Order Save karo in MongoDB (with image)
+    await axios.post("/api/orders", {
+      email: userEmail,
+      orders_data: basket.map((item) => ({
+        id: item.id,
+        title: item.name,
+        price: item.price,
+        image: item.image,
+        quantity: item.quantity || 1,
+        total: item.price * (item.quantity || 1),
+      })),
+    });
 
+    // ✅ STEP 2: Phir Stripe session create karo
+    const response = await axios.post("/api/checkout", {
+      items: basket.map((item) => ({
+        name: item.name,
+        quantity: item.quantity || 1,
+        price: item.price,
+      })),
+    });
+
+    if (response.data.url) {
+      dispatch({ type: "CLEAR_BASKET" }); // Optional: Clear cart
+      window.location.href = response.data.url; // Redirect to Stripe
+    } else {
+      alert("Stripe session creation failed.");
+    }
+  } catch (error) {
+    console.error("❌ Checkout Error:", error);
+    alert("An error occurred while processing your payment. Please try again.");
+  }
+};
+
+
+
+
+    
     return (
         <Box sx={{ p: 3 }}>
             <Typography variant="h4" fontWeight="bold" mb={3}>
