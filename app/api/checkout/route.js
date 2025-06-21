@@ -3,6 +3,8 @@ import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+console.log("✅ NEXT_PUBLIC_BASE_URL in production:", process.env.NEXT_PUBLIC_BASE_URL);
+
 
 export async function POST(req) {
   try {
@@ -50,6 +52,29 @@ export async function POST(req) {
   }
 }
 
+
+
+
+// import { NextResponse } from 'next/server';
+
+// export async function POST(req) {
+//   try {
+//     const body = await req.json();
+//     console.log("✅ Checkout Body:", body);  // 👈 Yeh dekhna zaroori hai
+
+//     // Simulated error (replace this with actual logic)
+//     // e.g., Stripe or DB code
+
+//     return NextResponse.json({ success: true });
+//   } catch (error) {
+//     console.error("❌ Checkout API Error:", error); // 👈 Real error message yahan print hoga
+
+//     return new NextResponse(
+//       JSON.stringify({ message: 'Checkout failed', error: error.message }),
+//       { status: 500 }
+//     );
+//   }
+// }
 
 
 
